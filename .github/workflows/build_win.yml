@@ -1,0 +1,51 @@
+name: Build Windows Release
+
+on:
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: windows-latest
+        permissions:
+            contents: write
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Cache cargo dependencies
+              uses: actions/cache@v3
+              with:
+                  path: |
+                      ~/.cargo/registry
+                      ~/.cargo/git
+                      target
+                  key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-cargo-
+
+            - name: Install Rust
+              uses: actions-rs/toolchain@v1
+              with:
+                  toolchain: stable
+                  override: true
+
+            - name: Build for Windows
+              run: cargo build --release
+
+            - name: Bundle game files
+              run: |
+                  mkdir package
+                  cp target/release/game-off.exe package/
+                  cp -r assets package/
+                  powershell Compress-Archive -Path package/* -DestinationPath game-off.zip
+
+            - name: Create Release and Upload Asset
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: manual-release-${{ github.run_id }}
+                  name: Manual Release ${{ github.run_id }}
+                  draft: false
+                  prerelease: false
+                  files: game-off.zip
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
