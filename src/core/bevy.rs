@@ -1,6 +1,8 @@
+use crate::{
+    core::{input::InputPlugin, sets::configure_order_set},
+    prelude::*,
+};
 use bevy::prelude::*;
-
-use crate::core::{input::InputPlugin, sets::configure_order_set};
 
 pub fn start_game() {
     App::new()
@@ -16,10 +18,7 @@ pub fn start_game() {
         .run();
 }
 
-struct GlobalPlugin;
-impl Plugin for GlobalPlugin {
-    fn build(&self, app: &mut App) {
-        configure_order_set(app);
-        app.add_plugins(InputPlugin);
-    }
-}
+plugin!(GlobalPlugin, |app| {
+    configure_order_set(app);
+    app.add_plugins(InputPlugin);
+});
