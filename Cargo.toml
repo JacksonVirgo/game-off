@@ -1,0 +1,26 @@
+[package]
+name = "game-off"
+version = "0.1.0"
+edition = "2024"
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[features]
+webgl2 = []
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
+codegen-units = 1
+panic = "abort"
+debug = false
+
+[[bin]]
+name = "game-off"
+path = "src/main.rs"
+
+[dependencies]
+bevy = "0.17.2"
+leafwing-input-manager = "0.18.0"
