@@ -17,9 +17,15 @@ codegen-units = 1
 panic = "abort"
 debug = false
 
+[target.'cfg(windows)'.dependencies]
+winapi = { version = "0.3", features = ["winuser"] }
+
 [[bin]]
 name = "game-off"
 path = "src/main.rs"
+
+[package.metadata.win]
+windows_subsystem = "windows"
 
 [dependencies]
 bevy = "0.17.2"
