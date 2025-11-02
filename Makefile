@@ -11,4 +11,7 @@ run-web:
 	cargo build --target wasm32-unknown-unknown
 	wasm-server-runner target/wasm32-unknown-unknown/debug/game-off.wasm
 
-.PHONY: install run run-web
+lint:
+	cargo clippy
+
+.PHONY: install run run-web lint
