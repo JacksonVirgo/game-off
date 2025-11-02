@@ -20,6 +20,9 @@ debug = false
 [target.'cfg(windows)'.dependencies]
 winapi = { version = "0.3", features = ["winuser"] }
 
+[target.wasm32-unknown-unknown]
+runner = "wasm-server-runner"
+
 [[bin]]
 name = "game-off"
 path = "src/main.rs"
