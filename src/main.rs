@@ -1,16 +1,7 @@
 #![cfg_attr(windows, windows_subsystem = "windows")]
 
-use bevy::prelude::*;
+use game_off::app::bevy::start_game;
 
 fn main() {
-    App::new()
-        .add_plugins(DefaultPlugins.set(WindowPlugin {
-            primary_window: Some(Window {
-                title: "Game Off".into(),
-                ..default()
-            }),
-            ..default()
-        }))
-        .insert_resource(ClearColor(Color::BLACK))
-        .run();
+    start_game();
 }
