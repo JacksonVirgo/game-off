@@ -2,18 +2,18 @@ use bevy::prelude::*;
 
 use crate::{
     systems::{
-        camera::spawn::SpawnCamera,
-        world::tiles::{data::TileKind, spawn::SpawnTile},
+        camera::spawn::{CameraType, SpawnCamera},
+        world::tiles::spawn::SpawnTile,
     },
     utils::grid::generate_hex_grid,
 };
 
 pub fn load_testing(mut commands: Commands) {
-    commands.spawn(SpawnCamera);
-
-    for hex_pos in generate_hex_grid(2, 577.0) {
+    commands.spawn(SpawnCamera(CameraType::World));
+    commands.spawn(SpawnCamera(CameraType::Ui));
+    for (tile_kind, hex_pos) in generate_hex_grid(3, 577.0) {
         commands.spawn(SpawnTile {
-            kind: TileKind::Empty,
+            kind: tile_kind,
             translation: hex_pos,
         });
     }

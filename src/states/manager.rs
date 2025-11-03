@@ -1,5 +1,7 @@
 use bevy::{ecs::system::ScheduleSystem, prelude::*};
 
+use crate::systems::turns::turn::Turn;
+
 #[derive(States, Default, Clone, Eq, PartialEq, Debug, Hash, Copy)]
 pub enum SceneState {
     #[default]
@@ -9,10 +11,16 @@ pub enum SceneState {
 #[derive(Component)]
 pub struct StatePersist;
 
-fn cleanup(mut commands: Commands, query: Query<Entity, Without<StatePersist>>) {
+fn cleanup(
+    mut commands: Commands,
+    query: Query<Entity, Without<StatePersist>>,
+    mut turn: ResMut<Turn>,
+) {
     for entity in &query {
         commands.entity(entity).despawn();
     }
+
+    turn.reset();
 }
 
 pub fn add_scene<M>(
