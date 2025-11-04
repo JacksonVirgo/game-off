@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+pub const DEFAULT_HUE_SPEED: f32 = 60.0;
+
 #[derive(Clone)]
 pub enum TileKind {
     Empty,
