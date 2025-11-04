@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+#[derive(Debug, Clone)]
 pub enum TurnPhase {
     Player,
     Environment,
@@ -14,7 +15,7 @@ impl TurnPhase {
     }
 }
 
-#[derive(Resource)]
+#[derive(Resource, Debug, Clone)]
 pub struct Turn {
     pub phase: TurnPhase,
     pub count: u32,

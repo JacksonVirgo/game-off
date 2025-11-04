@@ -4,11 +4,15 @@ use leafwing_input_manager::prelude::*;
 #[derive(Actionlike, PartialEq, Eq, Hash, Clone, Copy, Debug, Reflect)]
 pub enum InputActions {
     QuickExit,
+    EndTurn,
 }
 
 impl InputActions {
     pub fn player() -> InputMap<InputActions> {
-        InputMap::new([(InputActions::QuickExit, KeyCode::Escape)])
+        InputMap::new([
+            (InputActions::QuickExit, KeyCode::Escape),
+            (InputActions::EndTurn, KeyCode::Space),
+        ])
     }
 }
 

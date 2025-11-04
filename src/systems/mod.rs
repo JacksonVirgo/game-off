@@ -6,5 +6,5 @@ pub mod turns;
 pub mod world;
 
 plugin!(SystemPlugin, |app| {
-    app.add_plugins((camera::CameraPlugin, world::WorldPlugin));
+    app.add_plugins((camera::CameraPlugin, world::WorldPlugin, turns::TurnPlugin));
 });
