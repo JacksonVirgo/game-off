@@ -20,7 +20,7 @@ pub fn setup_ui(mut commands: Commands, asset_server: Res<AssetServer>) {
             Text::new("Turn: "),
             TextFont {
                 font: asset_server.load("fonts/Xolonium/Xolonium-Regular.ttf"),
-                font_size: 32.0,
+                font_size: 24.0,
                 ..default()
             },
             RenderLayers::layer(CAM_LAYER_UI),
