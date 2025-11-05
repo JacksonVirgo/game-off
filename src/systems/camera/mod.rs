@@ -3,6 +3,7 @@ use bevy::app::Update;
 use crate::prelude::*;
 
 pub mod controller;
+pub mod data;
 pub mod spawn;
 
 plugin!(CameraPlugin, |app| {

@@ -2,7 +2,7 @@ use bevy::prelude::*;
 
 use crate::{
     systems::{
-        camera::spawn::{CameraType, SpawnCamera},
+        camera::data::{CameraType, SpawnCamera},
         world::tiles::spawn::SpawnTile,
     },
     utils::grid::generate_hex_grid,

@@ -49,7 +49,7 @@ pub fn spawn_tile(
                     image_mode: SpriteImageMode::Scale(ScalingMode::FitCenter),
                     ..default()
                 },
-                Transform::default(),
+                Transform::from_xyz(0.0, 0.0, -1.0),
                 GlobalTransform::default(),
                 InheritedVisibility::default(),
             ));

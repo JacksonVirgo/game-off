@@ -1,13 +1,11 @@
-use crate::{prelude::*, systems::camera::controller::CameraController};
-use bevy::{camera::ScalingMode, prelude::*};
-
-pub enum CameraType {
-    World,
-    Ui,
-}
-
-#[derive(Component)]
-pub struct SpawnCamera(pub CameraType);
+use crate::{
+    prelude::*,
+    systems::camera::data::{CameraController, CameraType, SpawnCamera, UICameraController},
+};
+use bevy::{
+    camera::{ScalingMode, visibility::RenderLayers},
+    prelude::*,
+};
 
 pub fn spawn_camera(mut commands: Commands, q_spawners: Query<(Entity, &SpawnCamera)>) {
     for (entity, spawner) in q_spawners.iter() {
@@ -22,11 +20,23 @@ pub fn spawn_camera(mut commands: Commands, q_spawners: Query<(Entity, &SpawnCam
                         },
                         ..OrthographicProjection::default_2d()
                     }),
-                    Transform::from_xyz(0.0, 0.0, 999.0),
+                    Transform::from_xyz(0.0, 0.0, 10.0),
+                    Msaa::Sample4,
                     GlobalTransform::default(),
                 ));
             }
-            CameraType::Ui => {}
+            CameraType::Ui => {
+                commands.spawn((
+                    UICameraController,
+                    Camera2d::default(),
+                    Camera {
+                        order: CAM_LAYER_UI as isize,
+                        ..default()
+                    },
+                    RenderLayers::layer(CAM_LAYER_UI),
+                    Transform::default(),
+                ));
+            }
         }
 
         commands.entity(entity).despawn();

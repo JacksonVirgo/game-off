@@ -2,6 +2,7 @@ use crate::prelude::*;
 use bevy::prelude::*;
 
 pub mod data;
+pub mod grid;
 pub mod spawn;
 pub mod tile_state;
 
