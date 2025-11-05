@@ -53,7 +53,7 @@ pub fn world_to_axial(pos: Vec2, hex_width: f32) -> Coord {
     let z = r;
     let y = -x - z;
     let mut rx = x.round();
-    let mut ry = y.round();
+    let ry = y.round();
     let mut rz = z.round();
     let x_diff = (rx - x).abs();
     let y_diff = (ry - y).abs();
@@ -61,7 +61,7 @@ pub fn world_to_axial(pos: Vec2, hex_width: f32) -> Coord {
     if x_diff > y_diff && x_diff > z_diff {
         rx = -ry - rz;
     } else if y_diff > z_diff {
-        ry = -rx - rz;
+        _ = -rx - rz;
     } else {
         rz = -rx - ry;
     }
