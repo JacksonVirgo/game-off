@@ -13,7 +13,9 @@ pub const HEX_GAP: f32 = 1.2;
 plugin!(HexPlugin, |app| {
     app.add_systems(
         Update,
-        (state::update_tile_visuals).in_set(OrderSet::Visual),
+        (state::update_tile_state, state::update_tile_visuals)
+            .chain()
+            .in_set(OrderSet::Visual),
     );
 
     app.add_systems(Update, spawn::spawn_hex);

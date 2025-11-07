@@ -1,6 +1,6 @@
 use bevy::color::Color;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum HexKind {
     Unassigned,
     Core,
