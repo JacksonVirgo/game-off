@@ -105,6 +105,8 @@ pub fn update_tile_visuals(
 ) {
     let hue_speed = DEFAULT_HUE_SPEED;
 
+    let mut core_color: Color = Color::WHITE;
+
     for (child_of, mut sprite) in &mut q_tiles {
         if let Ok((tile, mut frame_sprite, flip_alert)) = tiles.get_mut(child_of.parent()) {
             match tile.kind {
@@ -112,6 +114,7 @@ pub fn update_tile_visuals(
                     let hue = sprite.color.hue();
                     let new_hue = (hue + hue_speed * time.delta_secs()) % 360.0;
                     sprite.color = Color::oklch(0.6, 0.1376, new_hue);
+                    core_color = sprite.color.clone();
                 }
                 _ => {
                     sprite.color = tile.kind.to_color();
@@ -119,9 +122,7 @@ pub fn update_tile_visuals(
             }
 
             if flip_alert.is_some() {
-                let hue = frame_sprite.color.hue();
-                let new_hue = (hue + hue_speed * time.delta_secs()) % 360.0;
-                frame_sprite.color = Color::oklch(0.6, 0.1376, new_hue);
+                frame_sprite.color = core_color;
             } else {
                 frame_sprite.color = Color::WHITE;
             }
