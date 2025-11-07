@@ -1,7 +1,9 @@
 use crate::prelude::*;
 
-pub mod tiles;
+pub mod grid;
+pub mod hex;
 
 plugin!(WorldPlugin, |app| {
-    app.add_plugins(tiles::TilePlugin);
+    app.init_resource::<grid::grid::HexGrid>();
+    app.add_plugins(hex::HexPlugin);
 });

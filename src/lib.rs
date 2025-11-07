@@ -5,7 +5,6 @@ pub mod core;
 pub mod macros;
 pub mod states;
 pub mod systems;
-pub mod utils;
 
 pub mod prelude {
     pub use crate::{
